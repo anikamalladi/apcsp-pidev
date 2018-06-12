@@ -11,3 +11,6 @@ cipher.o: cipher.c vigenere.h
 
 vigenere.o: vigenere.c vigenere.h
         gcc -Wall -c vigenere.c
+        
+    % make -n
+
