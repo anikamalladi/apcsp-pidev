@@ -1,3 +1,8 @@
+#makefile
+## this is our target
+cipher: cipher.o vigenere.o
+        gcc -o cipher cipher.o vigenere.o
+
 cipher: cipher.o vigenere.o
         gcc -o cipher cipher.o vigenere.o
 
