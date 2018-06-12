@@ -1,16 +1,22 @@
-#makefile
-## this is our target
-cipher: cipher.o vigenere.o
-        gcc -o cipher cipher.o vigenere.o
+TARGET = cipher
+LIBS = -lm
+CC = gcc
+CFLAGS = -g -Wall -I.
 
-cipher: cipher.o vigenere.o
-        gcc -o cipher cipher.o vigenere.o
+.PHONY: clean all default
 
-cipher.o: cipher.c vigenere.h
-        gcc -Wall -c cipher.c
+default: $(TARGET)
+all: default
 
-vigenere.o: vigenere.c vigenere.h
-        gcc -Wall -c vigenere.c
-        
-    % make -n
+HEADERS = $(wildcard *.h)
+OBJECTS = $(patsubst %.c, %.o, $(wildcard *.c))
 
+%.o: %.c $(HEADERS)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(TARGET): $(OBJECTS)
+	$(CC) $^ $(LIBS) -o $@
+
+clean:
+	-rm -f *.o
+	-rm -f $(TARGET)
